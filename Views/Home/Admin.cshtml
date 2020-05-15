@@ -3,4 +3,10 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<form>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Senha de admin: </label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+  </div>
+  <button type="submit" class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Teste">Entrar</button>
+</form>

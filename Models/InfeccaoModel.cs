@@ -33,5 +33,6 @@ namespace monitor_covid19.Models
         [Key]
         public int PaisId { get; set; }
         public string Nome { get; set; }
+        public InfeccaoModel infeccao { get; set; }
     }
 }

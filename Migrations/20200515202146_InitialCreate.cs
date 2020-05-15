@@ -27,21 +27,33 @@ namespace monitor_covid19.Migrations
                 {
                     PaisId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(nullable: true),
+                    InfeccaoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Paises", x => x.PaisId);
+                    table.ForeignKey(
+                        name: "FK_Paises_Infeccoes_InfeccaoId",
+                        column: x => x.InfeccaoId,
+                        principalTable: "Infeccoes",
+                        principalColumn: "InfeccaoId",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Paises_InfeccaoId",
+                table: "Paises",
+                column: "InfeccaoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Infeccoes");
+                name: "Paises");
 
             migrationBuilder.DropTable(
-                name: "Paises");
+                name: "Infeccoes");
         }
     }
 }

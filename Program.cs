@@ -18,19 +18,19 @@ namespace monitor_covid19
             using (var db = new CovidContext())
             {
                 // Create
-                db.Add(
-                    new PaisModel
-                    {
-                        Nome = "Brasil",
-                    }
-                );
-                db.SaveChanges();
+                // db.Add(
+                //     new PaisModel
+                //     {
+                //         Nome = "Brasil",
+                //     }
+                // );
+                // db.SaveChanges();
 
                 // Read
                 var pais = db.Paises
-                    .OrderBy(b => b.Nome)
-                    .First();
-                Console.WriteLine(pais);
+                            .OrderBy(b => b.Nome)
+                            .First();;
+                Console.WriteLine(pais.Nome);
 
                 // // Update
                 // Console.WriteLine("Updating the blog and adding a post");
@@ -47,6 +47,8 @@ namespace monitor_covid19
                 // Console.WriteLine("Delete the blog");
                 // db.Remove(blog);
                 // db.SaveChanges();
+
+                CreateHostBuilder(args).Build().Run();
             }
         }
 

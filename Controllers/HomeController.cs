@@ -34,31 +34,45 @@ namespace monitor_covid19.Controllers
       using (var db = new CovidContext())
       {
         // Create
-        Console.WriteLine("Add New Employee: ");
-        var novopais = new PaisModel();
-        novopais.Nome = "Brasil";
-        var novainfection = new InfeccaoModel();
-        novainfection.CasosConfirmados = 10;
-        novainfection.Mortes = 10;
-        novainfection.Recuperados = 100;
+        // var novopais = new PaisModel();
+        // novopais.Nome = "Brasil";
+        // var novainfection = new InfeccaoModel();
+        // novainfection.CasosConfirmados = 10;
+        // novainfection.Mortes = 10;
+        // novainfection.Recuperados = 100;
 
-        novopais.Infeccao = novainfection;
-        db.Infeccoes.Add(novainfection);
-        db.Paises.Add(novopais);
-        db.SaveChanges();
+        // novopais.Infeccao = novainfection;
+        // db.Infeccoes.Add(novainfection);
+        // db.Paises.Add(novopais);
+        // db.SaveChanges();
 
-        // var a = db.Query<Val>("").First();
 
         var employee = db.Paises
             .OrderBy(b => b.PaisId)
-            .First();
+            .Where(p => p.Nome == "Brasil")
+            .ToList();
 
         var employeee = db.Infeccoes
-                    .OrderBy(b => b.InfeccaoId)
-                    .First();
-        Console.WriteLine(employeee.Pais.Nome);
+                    .ToList();
+
+        foreach (var item in employee)
+        {
+          Console.WriteLine(item.PaisId);
+          Console.WriteLine(item.Nome);
+          Console.WriteLine(item.Infeccao.Recuperados);
+        }
 
       }
+      return View();
+    }
+
+    [Route("About")]
+    [Route("About/{id?}")]
+    public IActionResult About(int? id)
+    {
+      Console.WriteLine(id);
+      Console.WriteLine("OIIIIIIIIOIIIIIIIIOIIIIIIIIOIIIIIIIIOIIIIIIIIOIIIIIIIIOIIIIIIIIOIIIIIIIIOIIIIIIII");
+
       return View();
     }
 

@@ -28,13 +28,37 @@ namespace monitor_covid19.Controllers
       return View();
     }
 
+
     public IActionResult Admin()
     {
-      return View();
-    }
+      using (var db = new CovidContext())
+      {
+        // Create
+        Console.WriteLine("Add New Employee: ");
+        var novopais = new PaisModel();
+        novopais.Nome = "Brasil";
+        var novainfection = new InfeccaoModel();
+        novainfection.CasosConfirmados = 10;
+        novainfection.Mortes = 10;
+        novainfection.Recuperados = 100;
 
-    public IActionResult Teste()
-    {
+        novopais.Infeccao = novainfection;
+        db.Infeccoes.Add(novainfection);
+        db.Paises.Add(novopais);
+        db.SaveChanges();
+
+        // var a = db.Query<Val>("").First();
+
+        var employee = db.Paises
+            .OrderBy(b => b.PaisId)
+            .First();
+
+        var employeee = db.Infeccoes
+                    .OrderBy(b => b.InfeccaoId)
+                    .First();
+        Console.WriteLine(employeee.Pais.Nome);
+
+      }
       return View();
     }
 

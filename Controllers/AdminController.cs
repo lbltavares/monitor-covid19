@@ -41,6 +41,10 @@ namespace monitor_covid19.Controllers
         [HttpPost]
         public IActionResult Criar(string pais, string casos, string mortes, string recuperados)
         {
+            Console.WriteLine(pais);
+            Console.WriteLine(casos);
+            Console.WriteLine(mortes);
+            Console.WriteLine(recuperados);
 
             using (var db = new CovidContext())
             {
@@ -77,12 +81,35 @@ namespace monitor_covid19.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Index(string senha)
+        {
+            Console.WriteLine("Senha: " + senha);
+            if (senha == Senha)
+            {
+                using (var db = new CovidContext())
+                {
+                    var infeccoes = db.Infeccoes.ToList();
+                    db.Paises.ToList();
+
+                    ViewData["Infeccoes"] = infeccoes;
+
+                    return View("Painel");
+                }
+            }
+            else
+            {
+                ViewData["SenhaInvalida"] = true;
+                return View();
+            }
+        }
+
+
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

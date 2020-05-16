@@ -3,10 +3,14 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<form>
+<form method="POST">
   <div class="form-group">
     <label for="exampleInputPassword1">Senha de admin: </label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+    <input type="password" name="senha" class="form-control" id="exampleInputPassword1" placeholder="Senha">
   </div>
-  <button type="submit" class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Teste">Entrar</button>
+  <input type="submit" />
+@if (ViewData["SenhaInvalida"] != null && (bool)ViewData["SenhaInvalida"]){
+  <br>
+  <span style="color: red">Senha Inválida</span>
+}
 </form>

@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Admin";
 }
+
 <h1>@ViewData["Title"]</h1>
 
 <form method="POST">
@@ -8,7 +9,7 @@
     <label for="exampleInputPassword1">Senha de admin: </label>
     <input type="password" name="senha" class="form-control" id="exampleInputPassword1" placeholder="Senha">
   </div>
-  <input type="submit" />
+  <input class="btn btn-primary" type="submit" value="Entrar" />
 @if (ViewData["SenhaInvalida"] != null && (bool)ViewData["SenhaInvalida"]){
   <br>
   <span style="color: red">Senha Inválida</span>

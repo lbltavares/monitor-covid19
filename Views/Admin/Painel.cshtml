@@ -1,0 +1,106 @@
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<style>
+
+.my-custom-scrollbar {
+position: relative;
+height: 80vh;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+
+.form-control{
+    margin-bottom: 20px;
+}
+
+
+</style>
+
+<script>
+    function editar(pais, casos, mortes, recuperados) {
+
+        document.getElementById('pais').value = pais;
+        document.getElementById('casos').value = casos;
+        document.getElementById('mortes').value = mortes;
+        document.getElementById('recuperados').value = recuperados;
+    }
+
+</script>
+
+
+
+<div class="row">
+
+    <div class="col-4">
+
+<h4>
+    Editar ou Criar um item:
+</h4>
+<hr>
+
+<form method="POST" action='@Url.Action("Criar", "Admin")'>
+  <div class="form-group">
+    <label for="pais">Nome do País</label>
+    <input id="pais" name="pais" type="text" class="form-control" placeholder="Nome do País (ex: Brasil, Argentina, ...)">
+
+    <label for="casos">Casos Confirmados</label>
+    <input id="casos" name="casos" type="number" class="form-control" placeholder="Casos Confirmados">
+
+    <label for="mortes">Mortes</label>
+    <input id="mortes" name="mortes" type="number" class="form-control" placeholder="Número de Mortes">
+
+    <label for="recuperados">Recuperados</label>
+    <input id="recuperados" name="recuperados" type="number" class="form-control" placeholder="Número de pessoas que recuperaram da doença">
+
+    @* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> *@
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+    </div>
+
+    <div class="col-8">
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+<table class="table table-bordered table-striped mb-0">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">País</th>
+      <th scope="col">Casos Confirmados</th>
+      <th scope="col">Mortes</th>
+      <th scope="col">Recuperados</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Remover</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var i in (List<InfeccaoModel>)ViewData["Infeccoes"])
+    {
+    <tr>
+      <th scope="row">@i.InfeccaoId</th>
+      <td>@i.Pais.Nome</td>
+      <td>@i.CasosConfirmados</td>
+      <td>@i.Mortes</td>
+      <td>@i.Recuperados</td>
+      <td>
+          <button class="btn btn-warning" onclick="editar('@i.Pais.Nome', '@i.CasosConfirmados', '@i.Mortes', '@i.Recuperados')">Editar</button>
+      </td>
+      <td>
+        <form method="POST" action='@Url.Action("Remover", "Admin")'>
+          <input hidden type="text" name="infeccaoId" value="@i.InfeccaoId">
+          <input type="submit" value="Remover" class="btn btn-danger">
+        </form>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+</div>
+
+    </div>
+
+</div>

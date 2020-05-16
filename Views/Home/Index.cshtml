@@ -7,7 +7,7 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<table class="table">
+<table class="table table-bordered table-striped mb-0">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -18,12 +18,15 @@
     </tr>
   </thead>
   <tbody>
+    @foreach (var i in (List<InfeccaoModel>)ViewData["Infeccoes"])
+    {
     <tr>
-      <th scope="row">1</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
+      <th scope="row">@i.InfeccaoId</th>
+      <td>@i.Pais.Nome</td>
+      <td>@i.CasosConfirmados</td>
+      <td>@i.Mortes</td>
+      <td>@i.Recuperados</td>
     </tr>
+    }
   </tbody>
 </table>

@@ -2,7 +2,7 @@
 
 namespace monitor_covid19.Migrations
 {
-    public partial class InitialCreat : Migration
+    public partial class Mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

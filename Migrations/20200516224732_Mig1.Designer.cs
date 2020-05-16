@@ -8,8 +8,8 @@ using monitor_covid19.Models;
 namespace monitor_covid19.Migrations
 {
     [DbContext(typeof(CovidContext))]
-    [Migration("20200516190006_InitialCreat")]
-    partial class InitialCreat
+    [Migration("20200516224732_Mig1")]
+    partial class Mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

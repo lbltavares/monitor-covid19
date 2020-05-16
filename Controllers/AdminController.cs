@@ -104,44 +104,12 @@ namespace monitor_covid19.Controllers
             }
         }
 
+
         [HttpGet]
         public IActionResult Index()
         {
-            using (var db = new CovidContext())
-            {
-                // Create
-                // var novopais = new PaisModel();
-                // novopais.Nome = "Brasil";
-                // var novainfection = new InfeccaoModel();
-                // novainfection.CasosConfirmados = 10;
-                // novainfection.Mortes = 10;
-                // novainfection.Recuperados = 100;
-
-                // novopais.Infeccao = novainfection;
-                // db.Infeccoes.Add(novainfection);
-                // db.Paises.Add(novopais);
-                // db.SaveChanges();
-
-                // var a = db.Query<Val>("").First();
-
-                var inf = db.Infeccoes
-                            .OrderBy(b => b.InfeccaoId)
-                            .First();
-                Console.WriteLine("Pais: " + inf.Pais);
-
-            }
             return View();
         }
-
-
-
-
-
-
-
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

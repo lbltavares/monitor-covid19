@@ -15,6 +15,7 @@
       <th scope="col">Casos Confirmados</th>
       <th scope="col">Mortes</th>
       <th scope="col">Recuperados</th>
+      <th scope="col">Índice de Mortalidade(%)</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
       <td>@i.CasosConfirmados</td>
       <td>@i.Mortes</td>
       <td>@i.Recuperados</td>
+      <td>@(((i.Mortes * 1.0)/i.CasosConfirmados).ToString("0.00"))</td>
     </tr>
     }
   </tbody>

@@ -9,39 +9,82 @@ using monitor_covid19.Models;
 
 namespace monitor_covid19.Controllers
 {
-  public class HomeController : Controller
-  {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-      _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public IActionResult Index()
-    {
-      return View();
-    }
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
-    public IActionResult Privacy()
-    {
-      return View();
-    }
+        // Retorna os países e suas infecções:
+        public IActionResult Index()
+        {
+            using (var db = new CovidContext())
+            {
+                var paises = db.Paises.ToList();
+                ViewData["Paises"] = paises;
 
-    public IActionResult Admin()
-    {
-      return View();
-    }
+                return View();
+            }
+        }
 
-    public IActionResult Teste()
-    {
-      return View();
-    }
+        public string Pais()
+        {
+            using (var db = new CovidContext())
+            {
+                db.Add(
+                    new Pais
+                    {
+                        Nome = "Brasil",
+                    }
+                );
+                db.SaveChanges();
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                // Read
+                var paises = db.Paises.ToList();
+                ViewData["Paises"] = paises;
+            }
+            return "ok";
+        }
+
+        // Teste para adicionar paises
+        public IActionResult Teste()
+        {
+            using (var db = new CovidContext())
+            {
+                // Cria uma infeccao:
+                var i = new Infeccao
+                {
+                    CasosConfirmados = 240000,
+                    Mortes = 14000,
+                    Recuperados = 2300,
+                };
+                i = db.Add(i).Entity;
+
+                // Cria um pais:
+                db.Add(
+                    new Pais
+                    {
+                        Nome = "Brasil",
+                        InfeccaoId = i.InfeccaoId,
+                    }
+                );
+                db.SaveChanges();
+
+                // Read
+                var paises = db.Paises.ToList();
+                ViewData["Paises"] = paises;
+
+            }
+            return View("Index");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
-  }
 }

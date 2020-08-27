@@ -1,6 +1,6 @@
 # Monitor COVID-19
 
-Trabalho da Disciplina Laboratório de Desenvolvimento de Aplicações Móveis e Distribuídas - 1º Semestre/2020
+Trabalho da Disciplina "Laboratório de Desenvolvimento de Aplicações Móveis e Distribuídas" - 1º Semestre/2020 - Engenharia de Software - PUC-MG
 
 
 

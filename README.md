@@ -1,5 +1,9 @@
 # Monitor COVID-19
 
+Trabalho da Disciplina Laboratório de Desenvolvimento de Aplicações Móveis e Distribuídas - 1º Semestre/2020
+
+
+
 ![](https://i.ibb.co/YcQcTcz/download.png)
 
 ## Execução
